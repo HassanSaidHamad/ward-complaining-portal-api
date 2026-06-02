@@ -2,8 +2,11 @@ package ward.complain.portal.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ward.complain.portal.models.Complaint;
 import ward.complain.portal.models.District;
 import ward.complain.portal.models.Region;
+import ward.complain.portal.models.dtos.reponses.ComplaintResponseDTO;
+import ward.complain.portal.models.dtos.reponses.DistrictResponseDTO;
 import ward.complain.portal.models.dtos.requests.DistrictDTO;
 import ward.complain.portal.repository.DistrictRepository;
 import ward.complain.portal.repository.RegionRepository;
@@ -34,8 +37,11 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public List<District> getAllDistricts() {
-        return districtRepository.findAll();
+    public List<DistrictResponseDTO> getAllDistricts() {
+        return districtRepository.findAll()
+                .stream()
+                .map(this::mapToDistrictResponse)
+                .toList();
     }
 
     @Override
@@ -72,5 +78,16 @@ public class DistrictServiceImpl implements DistrictService {
     @Override
     public List<District> getDistrictsByRegion(Long regionId) {
         return districtRepository.findByRegionRegionId(regionId);
+    }
+
+
+    private DistrictResponseDTO mapToDistrictResponse(District district) {
+        DistrictResponseDTO responseDTO = new DistrictResponseDTO();
+
+        responseDTO.setDistrictId(district.getDistrictId());
+        responseDTO.setDistrictName(district.getDistrictName());
+        responseDTO.setRegion(district.getRegion());
+
+        return responseDTO;
     }
 }

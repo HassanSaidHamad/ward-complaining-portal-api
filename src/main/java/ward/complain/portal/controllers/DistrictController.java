@@ -25,8 +25,8 @@ public class DistrictController {
 
         return ResponseEntity.ok(HttpResponse.builder()
                 .timeStamp(new Date())
-                .httpStatus(HttpStatus.OK)
-                .httpStatusCode(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.CREATED)
+                .httpStatusCode(HttpStatus.CREATED.value())
                 .message("DISTRICT CREATED SUCCESSFULLY.")
                 .data(district)
                 .build());

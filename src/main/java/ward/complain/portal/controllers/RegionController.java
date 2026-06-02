@@ -28,8 +28,8 @@ public class RegionController {
 
         return ResponseEntity.ok(HttpResponse.builder()
                 .timeStamp(new Date())
-                .httpStatus(HttpStatus.OK)
-                .httpStatusCode(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.CREATED)
+                .httpStatusCode(HttpStatus.CREATED.value())
                 .message("REGION CREATED SUCCESSFULLY.")
                 .data(region)
                 .build());

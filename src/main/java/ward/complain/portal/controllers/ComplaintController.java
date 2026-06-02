@@ -38,7 +38,7 @@ public class ComplaintController {
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/status/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<HttpResponse> updateStatus(@RequestBody UpdateComplaintStatusDTO dto, @PathVariable long id) throws ModelNotFoundException {
         ComplaintResponseDTO complaint = complaintService.updateStatus(id, dto);

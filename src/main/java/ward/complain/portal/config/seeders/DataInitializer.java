@@ -32,8 +32,8 @@ public class DataInitializer {
             if (adminExists.isEmpty()) {
                 User admin = new User();
                 admin.setUuid(UUID.randomUUID());
-                admin.setFirstName("System Administrator");
-                admin.setLastName("System Administrator");
+                admin.setFirstName("System");
+                admin.setLastName("Administrator");
                 admin.setEmail("admin@gmail.com");
                 admin.setPhone("0000000000");
                 admin.setPassword(passwordEncoder.encode("admin@123"));

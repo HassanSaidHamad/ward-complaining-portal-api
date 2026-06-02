@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -18,6 +19,7 @@ public class LeaderResponseDTO {
     private String lastName;
     private String email;
     private String phone;
+    private List<String> roles;
     private String position;
     private LocalDateTime createdAt;
 }

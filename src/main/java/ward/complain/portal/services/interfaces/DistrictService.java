@@ -1,6 +1,7 @@
 package ward.complain.portal.services.interfaces;
 
 import ward.complain.portal.models.District;
+import ward.complain.portal.models.dtos.reponses.DistrictResponseDTO;
 import ward.complain.portal.models.dtos.requests.DistrictDTO;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface DistrictService {
 
     District createDistrict(DistrictDTO dto);
 
-    List<District> getAllDistricts();
+    List<DistrictResponseDTO> getAllDistricts();
 
     District getDistrictById(Long districtId);
 

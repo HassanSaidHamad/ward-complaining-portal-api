@@ -94,14 +94,6 @@ public class UserServiceImpl implements UserService {
                 .toList();
     }
 
-//    @Override
-//    public List<UserResponseDTO> getTourists() {
-//        return userRepository.findByRoleName("ROLE_USER")
-//                .stream()
-//                .map(this::mapToUserResponse)
-//                .toList();
-//    }
-
 
     @Override
     public User findById(long id) throws ModelNotFoundException {
@@ -143,6 +135,7 @@ public class UserServiceImpl implements UserService {
         responseDTO.setLastName(leader.getLastName());
         responseDTO.setEmail(leader.getEmail());
         responseDTO.setPhone(leader.getPhone());
+        responseDTO.setRoles(leader.getRoles().stream().map(Role::getName).toList());
         responseDTO.setPosition(leader.getPosition());
         responseDTO.setCreatedAt(leader.getCreatedAt());
 
@@ -159,6 +152,7 @@ public class UserServiceImpl implements UserService {
         responseDTO.setLastName(citizen.getLastName());
         responseDTO.setEmail(citizen.getEmail());
         responseDTO.setPhone(citizen.getPhone());
+        responseDTO.setRoles(citizen.getRoles().stream().map(Role::getName).toList());
         responseDTO.setStreetName(citizen.getStreetName());
         responseDTO.setCreatedAt(citizen.getCreatedAt());
 

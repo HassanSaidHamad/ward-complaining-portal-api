@@ -23,5 +23,4 @@ public class Leader extends User {
     @JoinColumn(name = "ward_id")
     @JsonBackReference
     private Ward ward;
-
 }
