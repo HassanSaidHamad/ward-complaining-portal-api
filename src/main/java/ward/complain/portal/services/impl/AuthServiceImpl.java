@@ -49,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
             throw new PhoneNumberExistsException("Phone number already taken");
         }
 
-        Ward ward = wardService.getWardById(wardId);
+        Ward ward = wardService.findWardById(wardId);
 
         Citizen citizen = new Citizen();
         Role userRole = roleRepository.findByName("ROLE_CITIZEN").orElseGet(() -> {

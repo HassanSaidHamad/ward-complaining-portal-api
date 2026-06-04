@@ -1,6 +1,7 @@
 package ward.complain.portal.services.interfaces;
 
 import ward.complain.portal.models.Ward;
+import ward.complain.portal.models.dtos.reponses.WardResponseDTO;
 import ward.complain.portal.models.dtos.requests.WardDTO;
 
 import java.util.List;
@@ -9,9 +10,11 @@ public interface WardService {
 
     Ward createWard(WardDTO dto);
 
-    List<Ward> getAllWards();
+    List<WardResponseDTO> getAllWards();
 
-    Ward getWardById(Long wardId);
+    WardResponseDTO getWardById(Long wardId);
+
+    Ward findWardById(Long wardId);
 
     Ward updateWard(Long wardId, WardDTO dto);
 

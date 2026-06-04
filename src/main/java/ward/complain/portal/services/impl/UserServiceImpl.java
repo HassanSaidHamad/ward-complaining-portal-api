@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
             throw new PhoneNumberExistsException("Phone number already taken");
         }
 
-        Ward ward = wardService.getWardById(wardId);
+        Ward ward = wardService.findWardById(wardId);
 
 
         Leader leader = new Leader();

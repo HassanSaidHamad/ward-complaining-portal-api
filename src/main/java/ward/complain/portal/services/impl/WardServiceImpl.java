@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ward.complain.portal.models.District;
 import ward.complain.portal.models.Ward;
+import ward.complain.portal.models.dtos.reponses.DistrictResponseDTO;
+import ward.complain.portal.models.dtos.reponses.WardResponseDTO;
 import ward.complain.portal.models.dtos.requests.WardDTO;
 import ward.complain.portal.repository.DistrictRepository;
 import ward.complain.portal.repository.WardRepository;
@@ -34,13 +36,25 @@ public class WardServiceImpl implements WardService {
     }
 
     @Override
-    public List<Ward> getAllWards() {
-        return wardRepository.findAll();
+    public List<WardResponseDTO> getAllWards() {
+        return wardRepository.findAll()
+                .stream()
+                .map(this::mapToWardResponse)
+                .toList();
     }
 
     @Override
-    public Ward getWardById(Long wardId) {
+    public WardResponseDTO getWardById(Long wardId) {
 
+        Ward ward = wardRepository.findById(wardId)
+                .orElseThrow(() ->
+                        new RuntimeException("WARD NOT FOUND"));
+
+        return mapToWardResponse(ward);
+    }
+
+    @Override
+    public Ward findWardById(Long wardId) {
         return wardRepository.findById(wardId)
                 .orElseThrow(() ->
                         new RuntimeException("WARD NOT FOUND"));
@@ -49,7 +63,7 @@ public class WardServiceImpl implements WardService {
     @Override
     public Ward updateWard(Long wardId, WardDTO dto) {
 
-        Ward ward = getWardById(wardId);
+        Ward ward = findWardById(wardId);
 
         District district = districtRepository.findById(dto.getDistrictId())
                 .orElseThrow(() ->
@@ -64,7 +78,7 @@ public class WardServiceImpl implements WardService {
     @Override
     public void deleteWard(Long wardId) {
 
-        Ward ward = getWardById(wardId);
+        Ward ward = findWardById(wardId);
 
         wardRepository.delete(ward);
     }
@@ -72,5 +86,17 @@ public class WardServiceImpl implements WardService {
     @Override
     public List<Ward> getWardsByDistrict(Long districtId) {
         return wardRepository.findByDistrictDistrictId(districtId);
+    }
+
+
+    private WardResponseDTO mapToWardResponse(Ward ward) {
+        WardResponseDTO responseDTO = new WardResponseDTO();
+
+        responseDTO.setWardId(ward.getWardId());
+        responseDTO.setWardName(ward.getWardName());
+        responseDTO.setDistrict(ward.getDistrict());
+        responseDTO.setRegion(ward.getDistrict().getRegion());
+
+        return responseDTO;
     }
 }

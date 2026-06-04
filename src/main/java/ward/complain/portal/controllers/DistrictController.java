@@ -32,6 +32,21 @@ public class DistrictController {
                 .build());
     }
 
+
+    @PutMapping("/{districtId}")
+    public ResponseEntity<HttpResponse> updateDistrict(@PathVariable long districtId, @RequestBody DistrictDTO dto) {
+
+        District district = districtService.updateDistrict(districtId, dto);
+
+        return ResponseEntity.ok(HttpResponse.builder()
+                .timeStamp(new Date())
+                .httpStatus(HttpStatus.OK)
+                .httpStatusCode(HttpStatus.OK.value())
+                .message("DISTRICT UPDATED SUCCESSFULLY.")
+                .data(district)
+                .build());
+    }
+
     @GetMapping
     public ResponseEntity<HttpResponse> getAllDistricts() {
 
@@ -41,6 +56,20 @@ public class DistrictController {
                 .httpStatusCode(HttpStatus.OK.value())
                 .message("DISTRICTS RETRIEVED SUCCESSFULLY.")
                 .data(districtService.getAllDistricts())
+                .build());
+    }
+
+
+    @GetMapping("/{districtId}")
+    public ResponseEntity<HttpResponse> getDistrictById(
+            @PathVariable Long districtId) {
+
+        return ResponseEntity.ok(HttpResponse.builder()
+                .timeStamp(new Date())
+                .httpStatus(HttpStatus.OK)
+                .httpStatusCode(HttpStatus.OK.value())
+                .message("DISTRICT RETRIEVED SUCCESSFULLY.")
+                .data(districtService.getDistrictById(districtId))
                 .build());
     }
 

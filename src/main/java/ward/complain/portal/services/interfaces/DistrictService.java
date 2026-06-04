@@ -12,12 +12,14 @@ public interface DistrictService {
 
     List<DistrictResponseDTO> getAllDistricts();
 
-    District getDistrictById(Long districtId);
+    DistrictResponseDTO getDistrictById(long districtId);
 
-    District updateDistrict(Long districtId, DistrictDTO dto);
+    District findDistrictById(long districtId);
 
-    void deleteDistrict(Long districtId);
+    District updateDistrict(long districtId, DistrictDTO dto);
 
-    List<District> getDistrictsByRegion(Long regionId);
+    void deleteDistrict(long districtId);
+
+    List<District> getDistrictsByRegion(long regionId);
 
 }

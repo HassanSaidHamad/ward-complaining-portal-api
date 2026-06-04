@@ -45,17 +45,26 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public District getDistrictById(Long districtId) {
+    public DistrictResponseDTO getDistrictById(long districtId) {
 
+        District district = districtRepository.findById(districtId)
+                .orElseThrow(() ->
+                        new RuntimeException("DISTRICT NOT FOUND"));
+
+        return mapToDistrictResponse(district);
+    }
+
+    @Override
+    public District findDistrictById(long districtId) {
         return districtRepository.findById(districtId)
                 .orElseThrow(() ->
                         new RuntimeException("DISTRICT NOT FOUND"));
     }
 
     @Override
-    public District updateDistrict(Long districtId, DistrictDTO dto) {
+    public District updateDistrict(long districtId, DistrictDTO dto) {
 
-        District district = getDistrictById(districtId);
+        District district = findDistrictById(districtId);
 
         Region region = regionRepository.findById(dto.getRegionId())
                 .orElseThrow(() ->
@@ -68,15 +77,15 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
-    public void deleteDistrict(Long districtId) {
+    public void deleteDistrict(long districtId) {
 
-        District district = getDistrictById(districtId);
+        District district = findDistrictById(districtId);
 
         districtRepository.delete(district);
     }
 
     @Override
-    public List<District> getDistrictsByRegion(Long regionId) {
+    public List<District> getDistrictsByRegion(long regionId) {
         return districtRepository.findByRegionRegionId(regionId);
     }
 
