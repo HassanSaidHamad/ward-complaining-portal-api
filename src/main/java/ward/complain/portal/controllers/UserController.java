@@ -27,7 +27,7 @@ public class UserController {
 
     @PostMapping("/add-leader/ward/{wardId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<HttpResponse> addProvider(@RequestBody LeaderRequestDTO dto, @PathVariable long wardId) throws Exception {
+    public ResponseEntity<HttpResponse> addNewLeader(@RequestBody LeaderRequestDTO dto, @PathVariable long wardId) throws Exception {
 
         LeaderResponseDTO leader = userService.addNewLeader(dto, wardId);
 

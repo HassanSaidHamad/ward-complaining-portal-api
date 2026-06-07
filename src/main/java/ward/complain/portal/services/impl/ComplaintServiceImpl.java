@@ -8,6 +8,7 @@ import ward.complain.portal.exceptions.models.ModelNotFoundException;
 import ward.complain.portal.models.Citizen;
 import ward.complain.portal.models.Complaint;
 import ward.complain.portal.models.ComplaintCategory;
+import ward.complain.portal.models.Leader;
 import ward.complain.portal.models.dtos.reponses.ComplaintResponseDTO;
 import ward.complain.portal.models.dtos.requests.ComplaintRequestDTO;
 import ward.complain.portal.models.dtos.requests.UpdateComplaintStatusDTO;
@@ -51,6 +52,34 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Override
     public List<ComplaintResponseDTO> getAllComplaints() {
         return complaintRepository.findAll()
+                .stream()
+                .map(this::mapToComplaintResponse)
+                .toList();
+    }
+
+
+    @Override
+    public List<ComplaintResponseDTO> getMyComplaints() throws ModelNotFoundException {
+        Leader leader = (Leader) authService.getCurrentUser();
+
+        return complaintRepository.findByWardLeaderId(leader.getId())
+                .stream()
+                .map(this::mapToComplaintResponse)
+                .toList();
+    }
+
+    @Override
+    public List<ComplaintResponseDTO> getMyComplaintsByStatus(ComplainStatus status) throws ModelNotFoundException {
+        Leader leader = (Leader) authService.getCurrentUser();
+
+        return complaintRepository.findByWardLeaderIdAndComplainStatus(leader.getId(), status)
+                .stream()
+                .map(this::mapToComplaintResponse)
+                .toList();    }
+
+    @Override
+    public List<ComplaintResponseDTO> getAllComplaintsByStatus(ComplainStatus status) {
+        return complaintRepository.findByComplainStatus(status)
                 .stream()
                 .map(this::mapToComplaintResponse)
                 .toList();

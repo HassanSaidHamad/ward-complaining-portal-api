@@ -28,6 +28,7 @@ public class ResponseServiceImpl implements ResponseService {
     public ResponseDTO respondComplaint(ResponseRequestDTO dto, long complaintId) throws ModelNotFoundException {
         Leader leader = (Leader) authService.getCurrentUser();
         Complaint complaint = complaintService.findComplaintById(complaintId);
+        complaint.setComplainStatus(dto.getComplainStatus());
 
         Response response = Response.builder()
                 .message(dto.getMessage())

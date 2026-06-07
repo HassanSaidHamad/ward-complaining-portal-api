@@ -39,7 +39,6 @@ public class ResponseController {
 
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_LEADER')")
     public ResponseEntity<HttpResponse> getAllResponses() {
 
         List<ResponseDTO> allResponses = responseService.getAllResponses();

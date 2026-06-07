@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import ward.complain.portal.enums.ComplainStatus;
 import ward.complain.portal.exceptions.models.ModelNotFoundException;
 import ward.complain.portal.models.Complaint;
 import ward.complain.portal.models.HttpResponse;
@@ -58,6 +59,54 @@ public class ComplaintController {
     public ResponseEntity<HttpResponse> getAllComplaints() {
 
         List<ComplaintResponseDTO> allComplaints = complaintService.getAllComplaints();
+
+        return ResponseEntity.ok(HttpResponse.builder()
+                .timeStamp(new Date())
+                .httpStatus(HttpStatus.OK)
+                .httpStatusCode(HttpStatus.OK.value())
+                .message("COMPLAINTS RETRIEVED SUCCESSFULLY.")
+                .data(allComplaints)
+                .build());
+    }
+
+
+    @GetMapping("/my-complaints")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<HttpResponse> getMyComplaints() throws ModelNotFoundException {
+
+        List<ComplaintResponseDTO> allComplaints = complaintService.getMyComplaints();
+//        List<Complaint> allComplaints = complaintService.getComplaints();
+
+        return ResponseEntity.ok(HttpResponse.builder()
+                .timeStamp(new Date())
+                .httpStatus(HttpStatus.OK)
+                .httpStatusCode(HttpStatus.OK.value())
+                .message("MY COMPLAINTS RETRIEVED SUCCESSFULLY.")
+                .data(allComplaints)
+                .build());
+    }
+
+
+    @GetMapping("/status/{status}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<HttpResponse> getAllComplaintsByStatus(@PathVariable ComplainStatus status) {
+
+        List<ComplaintResponseDTO> allComplaints = complaintService.getAllComplaintsByStatus(status);
+
+        return ResponseEntity.ok(HttpResponse.builder()
+                .timeStamp(new Date())
+                .httpStatus(HttpStatus.OK)
+                .httpStatusCode(HttpStatus.OK.value())
+                .message("COMPLAINTS RETRIEVED SUCCESSFULLY.")
+                .data(allComplaints)
+                .build());
+    }
+
+
+    @GetMapping("/mine/status/{status}")
+    public ResponseEntity<HttpResponse> getMyComplaintsByStatus(@PathVariable ComplainStatus status) throws ModelNotFoundException {
+
+        List<ComplaintResponseDTO> allComplaints = complaintService.getMyComplaintsByStatus(status);
 
         return ResponseEntity.ok(HttpResponse.builder()
                 .timeStamp(new Date())
