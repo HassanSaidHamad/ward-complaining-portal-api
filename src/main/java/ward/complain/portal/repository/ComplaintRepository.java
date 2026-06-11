@@ -13,6 +13,7 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Long> {
 
     List<Complaint> findByWardWardId(long wardId);
 
+    List<Complaint> findByCitizenId(long leaderId);
     List<Complaint> findByWardLeaderId(long leaderId);
 
     List<Complaint> findByComplainStatus(ComplainStatus status);

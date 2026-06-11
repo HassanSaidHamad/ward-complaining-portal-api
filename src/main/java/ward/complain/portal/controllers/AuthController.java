@@ -156,4 +156,5 @@ public class AuthController {
         return ResponseEntity.ok(authServiceImpl.registerNewCitizen(request, wardId));
     }
 
+
 }

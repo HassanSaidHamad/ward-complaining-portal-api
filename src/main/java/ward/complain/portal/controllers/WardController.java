@@ -60,6 +60,19 @@ public class WardController {
     }
 
 
+    @GetMapping("/all")
+    public ResponseEntity<HttpResponse> getWards() {
+
+        return ResponseEntity.ok(HttpResponse.builder()
+                .timeStamp(new Date())
+                .httpStatus(HttpStatus.OK)
+                .httpStatusCode(HttpStatus.OK.value())
+                .message("WARDS RETRIEVED SUCCESSFULLY.")
+                .data(wardService.getAllWards())
+                .build());
+    }
+
+
     @GetMapping("/{wardId}")
     public ResponseEntity<HttpResponse> getWardById(
             @PathVariable long wardId) {

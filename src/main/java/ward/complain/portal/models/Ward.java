@@ -29,8 +29,6 @@ public class Ward {
     @OneToMany(mappedBy = "ward")
     private List<Citizen> users;
 
-    //    @OneToMany(mappedBy = "ward")
-//    private List<Leader> leaders;
 
     @OneToOne(mappedBy = "ward")
     private Leader leader;

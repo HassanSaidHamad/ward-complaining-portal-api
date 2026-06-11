@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PUBLIC_SWAGGER_URLS).permitAll()
-                        .requestMatchers("/api/auth/**", "/api/chat/send/**").permitAll() // public endpoints
+                        .requestMatchers("/api/auth/**", "/api/wards/all/**").permitAll() // public endpoints
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

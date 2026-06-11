@@ -69,6 +69,16 @@ public class ComplaintServiceImpl implements ComplaintService {
     }
 
     @Override
+    public List<ComplaintResponseDTO> getAllCitizenComplaints() throws ModelNotFoundException {
+        Citizen citizen = (Citizen) authService.getCurrentUser();
+
+        return complaintRepository.findByCitizenId(citizen.getId())
+                .stream()
+                .map(this::mapToComplaintResponse)
+                .toList();
+    }
+
+    @Override
     public List<ComplaintResponseDTO> getMyComplaintsByStatus(ComplainStatus status) throws ModelNotFoundException {
         Leader leader = (Leader) authService.getCurrentUser();
 

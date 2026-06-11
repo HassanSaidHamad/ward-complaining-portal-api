@@ -17,6 +17,8 @@ public interface ComplaintService {
 
     List<ComplaintResponseDTO> getMyComplaints() throws ModelNotFoundException;
 
+    List<ComplaintResponseDTO> getAllCitizenComplaints() throws ModelNotFoundException;
+
     List<ComplaintResponseDTO> getMyComplaintsByStatus(ComplainStatus status) throws ModelNotFoundException;
 
     List<ComplaintResponseDTO> getAllComplaintsByStatus(ComplainStatus status);

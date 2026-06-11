@@ -71,11 +71,24 @@ public class ComplaintController {
 
 
     @GetMapping("/my-complaints")
-//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<HttpResponse> getMyComplaints() throws ModelNotFoundException {
 
         List<ComplaintResponseDTO> allComplaints = complaintService.getMyComplaints();
-//        List<Complaint> allComplaints = complaintService.getComplaints();
+
+        return ResponseEntity.ok(HttpResponse.builder()
+                .timeStamp(new Date())
+                .httpStatus(HttpStatus.OK)
+                .httpStatusCode(HttpStatus.OK.value())
+                .message("MY COMPLAINTS RETRIEVED SUCCESSFULLY.")
+                .data(allComplaints)
+                .build());
+    }
+
+
+    @GetMapping("/citizen")
+    public ResponseEntity<HttpResponse> getAllCitizenComplaints() throws ModelNotFoundException {
+
+        List<ComplaintResponseDTO> allComplaints = complaintService.getAllCitizenComplaints();
 
         return ResponseEntity.ok(HttpResponse.builder()
                 .timeStamp(new Date())
