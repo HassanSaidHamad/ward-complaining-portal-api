@@ -43,6 +43,24 @@ public class UserController {
     }
 
 
+    @PutMapping("/update-leader/{leaderId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<HttpResponse> updateLeader(@RequestBody LeaderRequestDTO dto, @PathVariable long leaderId) throws Exception {
+
+        LeaderResponseDTO leader = userService.updateLeader(dto, leaderId);
+
+        return ResponseEntity.ok(
+                HttpResponse.builder()
+                        .timeStamp(new Date())
+                        .httpStatus(HttpStatus.OK)
+                        .httpStatusCode(HttpStatus.OK.value())
+                        .message("LEADER UPDATED SUCCESSFULLY")
+                        .data(leader)
+                        .build()
+        );
+    }
+
+
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")

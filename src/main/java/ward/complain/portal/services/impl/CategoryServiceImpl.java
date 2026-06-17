@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ward.complain.portal.models.ComplaintCategory;
 import ward.complain.portal.models.Region;
+import ward.complain.portal.models.dtos.requests.CategoryDTO;
 import ward.complain.portal.models.dtos.requests.RegionDTO;
 import ward.complain.portal.repository.ComplaintCategoryRepository;
 import ward.complain.portal.services.interfaces.CategoryService;
-import ward.complain.portal.services.interfaces.RegionService;
 
 import java.util.List;
 
@@ -19,9 +19,14 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     @Override
-    public ComplaintCategory createRegion(RegionDTO dto) {
-        return null;
+    public ComplaintCategory createCategory(CategoryDTO dto) {
+        ComplaintCategory category = ComplaintCategory.builder()
+                .categoryName(dto.getCategoryName())
+                .build();
+
+        return categoryRepository.save(category);
     }
+
 
     @Override
     public List<ComplaintCategory> getAllComplaintCategories() {
@@ -29,17 +34,26 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public ComplaintCategory getRegionById(Long regionId) {
-        return null;
+    public ComplaintCategory getCategoryById(Long categoryId) {
+        return categoryRepository.findById(categoryId)
+                .orElseThrow(() ->
+                        new RuntimeException("CATEGORY NOT FOUND"));
     }
 
     @Override
-    public ComplaintCategory updateRegion(Long regionId, RegionDTO dto) {
-        return null;
+    public ComplaintCategory updateCategory(Long categoryId, CategoryDTO dto) {
+        ComplaintCategory category = getCategoryById(categoryId);
+
+        category.setCategoryName(dto.getCategoryName());
+
+        return categoryRepository.save(category);
     }
 
-    @Override
-    public void deleteRegion(Long regionId) {
 
+    @Override
+    public void deleteCategory(Long categoryId) {
+        ComplaintCategory region = getCategoryById(categoryId);
+
+        categoryRepository.delete(region);
     }
 }

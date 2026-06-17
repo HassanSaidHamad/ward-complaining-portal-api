@@ -69,6 +69,21 @@ public class ResponseController {
     }
 
 
+    @GetMapping("/complaint/{complaintId}")
+    public ResponseEntity<HttpResponse> getCitizenResponsesByComplaintId(@PathVariable long complaintId) throws ModelNotFoundException {
+
+        List<ResponseDTO> allResponses = responseService.getCitizenResponsesByComplaintId(complaintId);
+
+        return ResponseEntity.ok(HttpResponse.builder()
+                .timeStamp(new Date())
+                .httpStatus(HttpStatus.OK)
+                .httpStatusCode(HttpStatus.OK.value())
+                .message("CITIZEN RESPONSES RETRIEVED SUCCESSFULLY.")
+                .data(allResponses)
+                .build());
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<HttpResponse> getResponseById(@PathVariable long id) throws ModelNotFoundException {
 

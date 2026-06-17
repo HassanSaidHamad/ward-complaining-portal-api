@@ -1,21 +1,22 @@
 package ward.complain.portal.services.interfaces;
 
 import ward.complain.portal.models.ComplaintCategory;
-import ward.complain.portal.models.Region;
+import ward.complain.portal.models.dtos.requests.CategoryDTO;
 import ward.complain.portal.models.dtos.requests.RegionDTO;
 
 import java.util.List;
 
 public interface CategoryService {
 
-    ComplaintCategory createRegion(RegionDTO dto);
+    ComplaintCategory createCategory(CategoryDTO dto);
+
 
     List<ComplaintCategory> getAllComplaintCategories();
 
-    ComplaintCategory getRegionById(Long regionId);
+    ComplaintCategory getCategoryById(Long categoryId);
 
-    ComplaintCategory updateRegion(Long regionId, RegionDTO dto);
+    ComplaintCategory updateCategory(Long categoryId, CategoryDTO dto);
 
-    void deleteRegion(Long regionId);
+    void deleteCategory(Long categoryId);
 
 }

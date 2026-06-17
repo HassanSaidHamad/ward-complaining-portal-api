@@ -62,6 +62,16 @@ public class ResponseServiceImpl implements ResponseService {
     }
 
     @Override
+    public List<ResponseDTO> getCitizenResponsesByComplaintId(long complaintId) throws ModelNotFoundException {
+        List<Response> responses = responseRepository.findByComplaintComplaintId(complaintId);
+
+        return responses
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
+    @Override
     public ResponseDTO getResponseById(long id) throws ModelNotFoundException {
         Response response = responseRepository.findById(id)
                 .orElseThrow(() -> new ModelNotFoundException("Response by ID: " + id + " not found"));

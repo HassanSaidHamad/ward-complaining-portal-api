@@ -15,6 +15,8 @@ public interface ResponseService {
 
     List<ResponseDTO> getMyResponses() throws ModelNotFoundException;
 
+    List<ResponseDTO> getCitizenResponsesByComplaintId(long complaintId) throws ModelNotFoundException;
+
     ResponseDTO getResponseById(long id) throws ModelNotFoundException;
 
     Response findResponseById(long id) throws ModelNotFoundException;

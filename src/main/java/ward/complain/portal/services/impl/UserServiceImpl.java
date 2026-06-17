@@ -18,6 +18,7 @@ import ward.complain.portal.repository.UserRepository;
 import ward.complain.portal.services.interfaces.UserService;
 import ward.complain.portal.services.interfaces.WardService;
 
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -64,6 +65,33 @@ public class UserServiceImpl implements UserService {
         Set<Role> roles = new HashSet<>();
         roles.add(userRole);
         leader.setRoles(roles);
+
+        userRepository.save(leader);
+        return mapToLeaderResponse(leader);
+    }
+
+    @Override
+    public LeaderResponseDTO updateLeader(LeaderRequestDTO dto, long leaderId) throws EmailExistsException, PhoneNumberExistsException, IOException, ModelNotFoundException {
+
+        Leader leader = (Leader) findById(leaderId);
+
+        // 2. Check email uniqueness (if changed)
+        if (!leader.getEmail().equals(dto.getEmail()) &&
+                userRepository.existsByEmail(dto.getEmail())) {
+            throw new EmailExistsException("Email already taken");
+        }
+
+        // 3. Check phone uniqueness (if changed)
+        if (!leader.getPhone().equals(dto.getPhone()) &&
+                userRepository.existsByPhone(dto.getPhone())) {
+            throw new PhoneNumberExistsException("Phone number already taken");
+        }
+
+        leader.setFirstName(dto.getFirstName());
+        leader.setLastName(dto.getLastName());
+        leader.setEmail(dto.getEmail());
+        leader.setPhone(dto.getPhone());
+        leader.setPosition(dto.getPosition());
 
         userRepository.save(leader);
         return mapToLeaderResponse(leader);

@@ -23,5 +23,4 @@ public class ResponseDTO {
     private Response response;
     private LocalDateTime createdAt;
     private LocalDateTime respondedAt;
-
 }

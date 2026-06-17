@@ -16,6 +16,7 @@ import java.util.Optional;
 
 public interface UserService {
     LeaderResponseDTO addNewLeader(LeaderRequestDTO dto, long wardId) throws EmailExistsException, PhoneNumberExistsException, IOException;
+    LeaderResponseDTO updateLeader(LeaderRequestDTO dto, long leaderId) throws EmailExistsException, PhoneNumberExistsException, IOException, ModelNotFoundException;
 
 //    UpdateProviderResponseDTO addProviderByAdmin(String firstName, String lastName, String email, String phone, String password, String businessName, String description, MultipartFile document) throws EmailExistsException, PhoneNumberExistsException, IOException;
 
