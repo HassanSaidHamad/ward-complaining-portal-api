@@ -22,7 +22,7 @@ public class WardComplainingPortalApplication {
 	public CorsFilter corsFilter() {
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);
-		config.setAllowedOriginPatterns(List.of("http://localhost:4200"));  // <-- FIX
+		config.setAllowedOriginPatterns(List.of("http://localhost:4200", "http://localhost:35957"));  // <-- FIX
 		config.setAllowedHeaders(List.of("*"));  // Allow all headers
 		config.setExposedHeaders(List.of("*"));
 		config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));

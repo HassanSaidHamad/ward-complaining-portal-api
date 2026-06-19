@@ -55,7 +55,7 @@ public class ComplaintController {
 
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<HttpResponse> getAllComplaints() {
 
         List<ComplaintResponseDTO> allComplaints = complaintService.getAllComplaints();
