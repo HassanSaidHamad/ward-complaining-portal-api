@@ -44,6 +44,14 @@ public class WardServiceImpl implements WardService {
     }
 
     @Override
+    public List<WardResponseDTO> getAllWardsByDistrictId(long districtId) {
+        return wardRepository.findByDistrictDistrictId(districtId)
+                .stream()
+                .map(this::mapToWardResponse)
+                .toList();
+    }
+
+    @Override
     public WardResponseDTO getWardById(Long wardId) {
 
         Ward ward = wardRepository.findById(wardId)

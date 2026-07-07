@@ -14,6 +14,8 @@ public interface DistrictService {
 
     DistrictResponseDTO getDistrictById(long districtId);
 
+    List<DistrictResponseDTO> getDistrictByRegionId(long regionId);
+
     District findDistrictById(long districtId);
 
     District updateDistrict(long districtId, DistrictDTO dto);

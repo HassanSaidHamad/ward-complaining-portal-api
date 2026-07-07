@@ -12,6 +12,8 @@ public interface WardService {
 
     List<WardResponseDTO> getAllWards();
 
+    List<WardResponseDTO> getAllWardsByDistrictId(long districtId);
+
     WardResponseDTO getWardById(Long wardId);
 
     Ward findWardById(Long wardId);

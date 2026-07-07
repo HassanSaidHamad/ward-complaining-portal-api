@@ -73,6 +73,18 @@ public class WardController {
     }
 
 
+    @GetMapping("/all/district/{districtId}")
+    public ResponseEntity<HttpResponse> getAllWardsByDistrictId(@PathVariable long districtId) {
+
+        return ResponseEntity.ok(HttpResponse.builder()
+                .timeStamp(new Date())
+                .httpStatus(HttpStatus.OK)
+                .httpStatusCode(HttpStatus.OK.value())
+                .message("WARDS RETRIEVED SUCCESSFULLY.")
+                .data(wardService.getAllWardsByDistrictId(districtId))
+                .build());
+    }
+
     @GetMapping("/{wardId}")
     public ResponseEntity<HttpResponse> getWardById(
             @PathVariable long wardId) {

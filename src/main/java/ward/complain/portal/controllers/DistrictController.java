@@ -73,6 +73,21 @@ public class DistrictController {
                 .build());
     }
 
+
+    @GetMapping("/all/region/{regionId}")
+    public ResponseEntity<HttpResponse> getDistrictByRegionId(
+            @PathVariable Long regionId) {
+
+        return ResponseEntity.ok(HttpResponse.builder()
+                .timeStamp(new Date())
+                .httpStatus(HttpStatus.OK)
+                .httpStatusCode(HttpStatus.OK.value())
+                .message("DISTRICT RETRIEVED SUCCESSFULLY.")
+                .data(districtService.getDistrictByRegionId(regionId))
+                .build());
+    }
+
+
     @GetMapping("/region/{regionId}")
     public ResponseEntity<HttpResponse> getDistrictsByRegion(
             @PathVariable Long regionId) {

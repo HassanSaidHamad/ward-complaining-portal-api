@@ -35,6 +35,22 @@ public class RegionController {
                 .build());
     }
 
+
+    @GetMapping("/all")
+    public ResponseEntity<HttpResponse> getRegions() {
+
+        List<Region> regions = regionService.getAllRegions();
+
+        return ResponseEntity.ok(HttpResponse.builder()
+                .timeStamp(new Date())
+                .httpStatus(HttpStatus.OK)
+                .httpStatusCode(HttpStatus.OK.value())
+                .message("REGIONS RETRIEVED SUCCESSFULLY.")
+                .data(regions)
+                .build());
+    }
+
+
     @GetMapping
     public ResponseEntity<HttpResponse> getAllRegions() {
 

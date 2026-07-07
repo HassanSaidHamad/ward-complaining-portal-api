@@ -55,6 +55,15 @@ public class DistrictServiceImpl implements DistrictService {
     }
 
     @Override
+    public List<DistrictResponseDTO> getDistrictByRegionId(long regionId) {
+        return districtRepository.findByRegionRegionId(regionId)
+                .stream()
+                .map(this::mapToDistrictResponse)
+                .toList();
+    }
+
+
+    @Override
     public District findDistrictById(long districtId) {
         return districtRepository.findById(districtId)
                 .orElseThrow(() ->
